@@ -1,7 +1,6 @@
 package com.example.myandroidapp.data.db
 
 import androidx.room.*
-import com.example.myandroidapp.data.model.ApiObject
 
 @Entity(tableName = "api_objects")
 data class ApiObjectEntity(

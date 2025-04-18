@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myandroidapp.data.local.UserDao
-import com.example.myandroidapp.data.local.UserEntity
 
 @Database(
     entities = [UserEntity::class, ApiItemEntity::class],

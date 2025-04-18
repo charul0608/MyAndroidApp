@@ -18,6 +18,10 @@ import com.example.myandroidapp.ui.viewmodel.ApiViewModel
 import com.example.myandroidapp.ui.viewmodel.ApiViewModelFactory
 import com.example.myandroidapp.util.NotificationPreferenceManager
 import kotlinx.coroutines.launch
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.Lifecycle
+
+
 
 class ApiListActivity : AppCompatActivity() {
 
@@ -35,9 +39,10 @@ class ApiListActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         adapter = ApiObjectAdapter(
-            onDelete = { item -> viewModel.deleteObject(item) },
+            onDelete = { item -> viewModel.deleteObject(item, this@ApiListActivity) }, // ✅ pass context!
             onUpdate = { item -> updateItem(item) }
         )
+
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -59,10 +64,13 @@ class ApiListActivity : AppCompatActivity() {
         val switch = findViewById<Switch>(R.id.switchNotific)
         val prefs = NotificationPreferenceManager(this)
         lifecycleScope.launch {
-            prefs.notificationsEnabled.collect { enabled ->
-                switch.isChecked = enabled
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                prefs.notificationsEnabled.collect { enabled ->
+                    switch.isChecked = enabled
+                }
             }
         }
+
 
         switch.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch {

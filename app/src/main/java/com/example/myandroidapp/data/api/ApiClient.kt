@@ -1,6 +1,5 @@
 package com.example.myandroidapp.data.api
 
-import com.example.myandroidapp.data.api.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

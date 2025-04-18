@@ -10,7 +10,8 @@ class ApiRepository(private val dao: ApiObjectDao) {
         val response = ApiClient.retrofit.getObjects()
         return if (response.isSuccessful) {
             val objects = response.body()?.map {
-                ApiObjectEntity(it.id, it.name, it.data.joinToString(","))
+                val dataString = it.data?.map { (k, v) -> "$k: $v" }?.joinToString(", ") ?: "N/A"
+                ApiObjectEntity(it.id, it.name, dataString)
             } ?: emptyList()
             dao.insertAll(objects)
             true
