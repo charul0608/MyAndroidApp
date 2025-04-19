@@ -16,11 +16,10 @@ import com.example.myandroidapp.data.repository.ApiRepository
 import com.example.myandroidapp.ui.view.adapters.ApiObjectAdapter
 import com.example.myandroidapp.ui.viewmodel.ApiViewModel
 import com.example.myandroidapp.ui.viewmodel.ApiViewModelFactory
-import com.example.myandroidapp.util.NotificationPreferenceManager
 import kotlinx.coroutines.launch
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.Lifecycle
-
+import com.example.myandroidapp.data.NotificationPreferences
+import com.example.myandroidapp.data.api.ApiClient
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class ApiListActivity : AppCompatActivity() {
@@ -38,10 +37,36 @@ class ApiListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_api_list)
 
         recyclerView = findViewById(R.id.recyclerView)
+//        adapter = ApiObjectAdapter(
+//            onDelete = { item -> viewModel.deleteObject(item, this@ApiListActivity) },
+//            onUpdate = { item -> updateItem(item) }
+//        )
+
         adapter = ApiObjectAdapter(
-            onDelete = { item -> viewModel.deleteObject(item, this@ApiListActivity) }, // ✅ pass context!
+            onDelete = { item ->
+
+                FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+
+                    val apiService = ApiClient.retrofit
+
+                    viewModel.deleteObject(
+                        entity = item,
+                        context = this@ApiListActivity,
+                        token = token,
+                        prefs = NotificationPreferences(this),
+                        apiService = apiService
+                    )
+
+//                    viewModel.deleteTestObject(
+//                        context = this@ApiListActivity,
+//                        token = token,
+//                        prefs = NotificationPreferences(this)
+//                    )
+                }
+            },
             onUpdate = { item -> updateItem(item) }
         )
+
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -61,26 +86,43 @@ class ApiListActivity : AppCompatActivity() {
 
         viewModel.fetchObjects()
 
+//        val switch = findViewById<Switch>(R.id.switchNotific)
+//        val prefs = NotificationPreferenceManager(this)
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                prefs.notificationsEnabled.collect { enabled ->
+//                    switch.isChecked = enabled
+//                }
+//            }
+//        }
+
+        val prefs = NotificationPreferences(this)
+
         val switch = findViewById<Switch>(R.id.switchNotific)
-        val prefs = NotificationPreferenceManager(this)
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                prefs.notificationsEnabled.collect { enabled ->
-                    switch.isChecked = enabled
-                }
+            prefs.isEnabled.collect { enabled ->
+                switch.isChecked = enabled
             }
         }
-
 
         switch.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch {
-                prefs.setNotificationsEnabled(isChecked)
+                prefs.setEnabled(isChecked)
             }
         }
+
+
+
+//        switch.setOnCheckedChangeListener { _, isChecked ->
+//            lifecycleScope.launch {
+//                prefs.setNotificationsEnabled(isChecked)
+//            }
+//        }
     }
 
     private fun updateItem(item: ApiObjectEntity) {
         val updated = item.copy(name = item.name + " Updated")
         viewModel.updateObject(updated)
+
     }
 }

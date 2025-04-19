@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".MainActivity">
 
 
     <com.google.android.material.button.MaterialButton
@@ -43,7 +43,7 @@
         android:id="@+id/pdfView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Open Pdf Viewer"
+        android:text="@string/open_pdf_viewer"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -58,7 +58,7 @@
         android:id="@+id/roomDb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Api List"
+        android:text="@string/show_data_list"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"

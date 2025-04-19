@@ -5,10 +5,20 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/user_authentication"
+        android:padding="10dp"
+        android:background="#EEE" />
+
     <Button
         android:id="@+id/btnCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/capture_image" />
 
     <Button
@@ -18,11 +28,5 @@
         android:text="@string/select_from_gallery"
         android:layout_marginTop="8dp" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="16dp"
-        android:background="#EEE" />
+
 </LinearLayout>

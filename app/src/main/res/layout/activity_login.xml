@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".ui.view.activities.LoginActivity">
+    android:padding="24dp">
 
     <Button
         android:id="@+id/btnGoogleSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in with Google" />
+        android:text="@string/sign_in_with_google" />
 </LinearLayout>

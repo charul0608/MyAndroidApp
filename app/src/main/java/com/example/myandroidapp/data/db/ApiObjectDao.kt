@@ -16,8 +16,8 @@ interface ApiObjectDao {
     suspend fun getAll(): List<ApiObjectEntity>
 
     @Update
-    suspend fun update(apiObjectEntity: ApiObjectEntity)
+    suspend fun update(apiObjectEntity: ApiObjectEntity): Int
 
     @Delete
-    suspend fun delete(apiObjectEntity: ApiObjectEntity)
+    suspend fun delete(apiObjectEntity: ApiObjectEntity): Int
 }

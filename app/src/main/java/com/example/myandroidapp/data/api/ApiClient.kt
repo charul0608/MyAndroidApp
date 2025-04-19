@@ -1,5 +1,6 @@
 package com.example.myandroidapp.data.api
 
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,5 +13,14 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+    }
+
+    fun create(): ApiService {
+        return retrofit
+    }
+
+    // Method to delete an item
+    suspend fun deleteItem(itemId: String): Response<Unit> {
+        return retrofit.deleteItem(itemId)
     }
 }

@@ -7,7 +7,9 @@ import com.example.myandroidapp.data.db.ApiObjectEntity
 class ApiRepository(private val dao: ApiObjectDao) {
 
     suspend fun fetchAndStoreObjects(): Boolean {
-        val response = ApiClient.retrofit.getObjects()
+        val response = ApiClient.retrofit.
+
+        getObjects()
         return if (response.isSuccessful) {
             val objects = response.body()?.map {
                 val dataString = it.data?.map { (k, v) -> "$k: $v" }?.joinToString(", ") ?: "N/A"
@@ -24,5 +26,5 @@ class ApiRepository(private val dao: ApiObjectDao) {
 
     suspend fun updateObject(entity: ApiObjectEntity) = dao.update(entity)
 
-    suspend fun deleteObject(entity: ApiObjectEntity) = dao.delete(entity)
+    suspend fun deleteObject(entity: ApiObjectEntity): Int = dao.delete(entity)
 }

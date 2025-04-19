@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.signOutBtn).setOnClickListener {
             auth.signOut()
             startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 }

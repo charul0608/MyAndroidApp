@@ -15,4 +15,9 @@
     <string name="enable_notifications">Enable Notifications</string>
     <string name="sign_out">Sign Out</string>
     <string name="open_image_reader">Open Image Reader</string>
+    <string name="google_login">Google LogIn</string>
+    <string name="image">image</string>
+    <string name="show_data_list">show data list</string>
+    <string name="open_pdf_viewer">Open Pdf Viewer</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
 </resources>

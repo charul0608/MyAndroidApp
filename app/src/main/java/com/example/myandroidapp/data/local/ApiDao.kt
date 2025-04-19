@@ -2,7 +2,6 @@ package com.example.myandroidapp.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.myandroidapp.data.local.ApiItemEntity
 
 @Dao
 interface ApiDao {
