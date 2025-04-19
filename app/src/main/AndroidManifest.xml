@@ -2,21 +2,106 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Camera Feature Declaration -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/user_authentication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyAndroidApp"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         tools:targetApi="31">
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+        <!--         Google Sign-In -->
+        <meta-data
+            android:name="com.google.android.gms.auth.api.signin"
+            android:value="@string/default_web_client_id" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/user_authentication" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/quantum_pink" />
+
+        <!-- Activities -->
+<!--        <activity android:name="com.example.myandroidapp.ui.view.activities.LoginActivity"-->
+<!--            android:theme="@style/Theme.MyKotlinApp.AppCompat"-->
+<!--            android:exported="true"/>-->
+
+        <activity android:name="com.example.myandroidapp.ui.view.activities.PdfViewerActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="true"/>
+
+        <activity android:name="com.example.myandroidapp.ui.view.activities.ImagePickerActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="true"/>
+        <activity android:name="com.example.myandroidapp.ui.view.activities.ApiListActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="true"/>
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MyAndroidApp">
+            android:name="com.example.myandroidapp.ui.view.activities.BaseActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name="com.example.myandroidapp.ui.view.activities.ForgetPasswordActivity"-->
+<!--            android:theme="@style/Theme.MyKotlinApp.AppCompat"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name="com.example.myandroidapp.ui.view.activities.SignUpActivity"-->
+<!--            android:theme="@style/Theme.MyKotlinApp.AppCompat"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name="com.example.myandroidapp.ui.view.activities.SignInActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="false">
+        </activity>
+
+<!--        <activity-->
+<!--            android:name="com.example.myandroidapp.ui.view.activities.AddGarbageActivity"-->
+<!--            android:theme="@style/Theme.MyKotlinApp.AppCompat"-->
+<!--            android:exported="false" />-->
+
+<!--        <activity-->
+<!--            android:name=".ui.view.activities.GetStartedActivity"-->
+<!--            android:theme="@style/Theme.MyKotlinApp.AppCompat"-->
+<!--            android:exported="false" />-->
+
+        <activity android:name="com.example.myandroidapp.MainActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="true">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".ui.view.activities.SplashActivity"
+            android:theme="@style/Theme.MyKotlinApp.AppCompat"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
