@@ -9,15 +9,23 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+// Define extension at top level
+val Context.notificationDataStore: DataStore<Preferences> by preferencesDataStore(name = "notification_settings")
 
-class NotificationPreferences(context: Context) {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("notification_settings")
-    private val dataStore = context.dataStore
+// Use object (singleton) to avoid multiple instances
+class NotificationPreferences {
+
     private val NOTIF_KEY = booleanPreferencesKey("notif_enabled")
 
-    val isEnabled: Flow<Boolean> = dataStore.data.map { it[NOTIF_KEY] ?: true }
+    fun isEnabledFlow(context: Context): Flow<Boolean> {
+        return context.notificationDataStore.data.map { prefs ->
+            prefs[NOTIF_KEY] ?: true
+        }
+    }
 
-    suspend fun setEnabled(enabled: Boolean) {
-        dataStore.edit { it[NOTIF_KEY] = enabled }
+    suspend fun setEnabled(context: Context, enabled: Boolean) {
+        context.notificationDataStore.edit { prefs ->
+            prefs[NOTIF_KEY] = enabled
+        }
     }
 }

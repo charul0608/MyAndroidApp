@@ -26,6 +26,7 @@ class ApiObjectAdapter(
     inner class ApiObjectViewHolder(private val binding: ItemApiObjectBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ApiObjectEntity) {
             binding.textViewName.text = item.name
+            binding.textViewId.text = item.data
 
             binding.btnDelete.setOnClickListener {
                 onDelete(item)

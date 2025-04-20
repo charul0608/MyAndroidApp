@@ -65,7 +65,7 @@ class ApiViewModel(private val repository: ApiRepository) : ViewModel() {
     }
 
     private fun sendDeleteNotification(context: Context, token: String, itemName: String) {
-        val url = "https://<your-cloud-function-url>" // Replace with your deployed function URL
+        val url = "http://192.168.1.8:3000/send-notification" // Replace with your deployed function URL
         val jsonBody = JSONObject().apply {
             put("token", token)
             put("name", itemName)
@@ -73,7 +73,7 @@ class ApiViewModel(private val repository: ApiRepository) : ViewModel() {
 
         val request = JsonObjectRequest(
             Request.Method.POST, url, jsonBody,
-            { Log.d("Notification", "Notification sent") },
+            { Log.d("Notification", "Sending to URL: $url") },
             { error -> Log.e("Notification", "Error", error) }
         )
 
@@ -94,7 +94,7 @@ class ApiViewModel(private val repository: ApiRepository) : ViewModel() {
 
                 val response = ApiClient.deleteItem(item.id)
                 if (response.isSuccessful) {
-                    prefs.isEnabled.firstOrNull()?.let { isEnabled ->
+                    prefs.isEnabledFlow(context).firstOrNull()?.let { isEnabled ->
                         if (isEnabled) {
                             sendDeleteNotification(context, token, item.name)
                         }
