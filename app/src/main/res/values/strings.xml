@@ -20,4 +20,5 @@
     <string name="show_data_list">show data list</string>
     <string name="open_pdf_viewer">Open Pdf Viewer</string>
     <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="please_sign_in_with_google">Please sign in with Google</string>
 </resources>

@@ -1,72 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/white">
 
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to My App"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signOutBtn"
+    <!-- Image Picker Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imagePickerCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/sign_out"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_below="@id/appTitle"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
+        <Button
+            android:id="@+id/imagePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image Picker"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="12dp"/>
+    </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/imagePicker"
+    <!-- PDF Viewer Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pdfViewCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagePickerCard"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
+        <Button
+            android:id="@+id/pdfView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PDF Viewer"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="12dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- API List Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/roomDbCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pdfViewCard"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
+        <Button
+            android:id="@+id/roomDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="API List"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="12dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Sign Out Button positioned at the bottom-right -->
+    <Button
+        android:id="@+id/signOutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/open_image_reader"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:backgroundTint="@color/purple_200"
-        app:layout_constraintBottom_toTopOf="@+id/pdfView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Sign Out"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/colorAccent"
+        android:padding="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/pdfView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_pdf_viewer"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:backgroundTint="@color/purple_200"
-        app:layout_constraintBottom_toTopOf="@+id/roomDb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagePicker" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/roomDb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_data_list"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:backgroundTint="@color/purple_200"
-        app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pdfView" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

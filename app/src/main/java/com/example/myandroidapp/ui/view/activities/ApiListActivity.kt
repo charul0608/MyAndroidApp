@@ -53,7 +53,7 @@ class ApiListActivity : AppCompatActivity() {
                         entity = item,
                         context = this@ApiListActivity,
                         token = token,
-                        prefs = NotificationPreferences(this),
+                        prefs = NotificationPreferences(),
                         apiService = apiService
                     )
 
@@ -96,18 +96,20 @@ class ApiListActivity : AppCompatActivity() {
 //            }
 //        }
 
-        val prefs = NotificationPreferences(this)
+        val prefs = NotificationPreferences()
 
         val switch = findViewById<Switch>(R.id.switchNotific)
         lifecycleScope.launch {
-            prefs.isEnabled.collect { enabled ->
+            prefs.isEnabledFlow(context = this@ApiListActivity).collect { enabled ->
                 switch.isChecked = enabled
             }
         }
 
         switch.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch {
-                prefs.setEnabled(isChecked)
+                if(isChecked){
+                    prefs.setEnabled(context = this@ApiListActivity,true)
+                }
             }
         }
 
